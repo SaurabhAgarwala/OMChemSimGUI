@@ -3,6 +3,7 @@ from OMChem.MatStm import MatStm
 from OMChem.Mixer import Mixer
 from OMChem.EngStm import EngStm
 from OMChem.Heater import Heater
+from OMChem.Heat_Exchanger import Heat_Exchanger
 from OMChem.Flash import Flash
 from OMChem.Splitter import Splitter
 from OMChem.Valve import Valve
@@ -27,6 +28,8 @@ def helperFunc(type,name1,count):
         return Flash(name=(name1,count))
     elif(type=="Heater"):
         return Heater(name=name1)
+    elif(type=="Heat_Exchanger"):
+        return Heat_Exchanger(name=name1)
     elif(type=="Valve"):
         return Valve(name=name1)
     elif(type=="Cooler"):

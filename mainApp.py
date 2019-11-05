@@ -6,6 +6,7 @@ from OMChem.Flowsheet import Flowsheet
 from OMChem.MatStm import MatStm
 from OMChem.Mixer import Mixer
 from OMChem.Heater import Heater
+from OMChem.Heat_Exchanger import Heat_Exchanger
 from OMChem.Splitter import Splitter
 import pandas as pd
 from PyQt5.QtCore import *
@@ -27,7 +28,7 @@ import datetime
 from container import Container
 ui,_ = loadUiType('main.ui')
 #comp_dict is a dictionary in which keys are the type of component and value is a list [counter_of_that_particular_type ,Number of ip,Number of op]
-comp_dict ={'MatStm':[1,1,1],'EngStm':[1,1,1],'Mixer':[1,4,1],'Splitter':[1,1,4],'Flash':[1,1,2],'Heater':[1,1,1],'Valve':[1,1,1],'Cooler':[1,1,1],'CompSep':[1,1,2],'Pump':[1,1,1],'AdiaComp':[1,1,1],'AdiaExp':[1,1,1],'DistCol':[1,2,2],'ShortCol':[1,1,2]}
+comp_dict ={'MatStm':[1,1,1],'EngStm':[1,1,1],'Mixer':[1,4,1],'Splitter':[1,1,4],'Flash':[1,1,2],'Heater':[1,1,1],'Heat_Exchanger':[1,1,1],'Valve':[1,1,1],'Cooler':[1,1,1],'CompSep':[1,1,2],'Pump':[1,1,1],'AdiaComp':[1,1,1],'AdiaExp':[1,1,1],'DistCol':[1,2,2],'ShortCol':[1,1,2]}
 
 '''
     MainApp class is responsible for all the main App Ui operations
@@ -81,6 +82,7 @@ class MainApp(QMainWindow,ui):
         self.pushButton_26.clicked.connect(partial(self.component,'DistCol'))
         self.pushButton_18.clicked.connect(partial(self.component,'ShortCol'))
         self.pushButton_11.clicked.connect(partial(self.component,'Heater'))
+        self.pushButton_17.clicked.connect(partial(self.component,'Heat_Exchanger'))
         self.pushButton_10.clicked.connect(partial(self.component,'Splitter'))
         self.pushButton_9.clicked.connect(partial(self.component,'Flash'))
         self.pushButton_25.clicked.connect(partial(self.component,'Valve'))
@@ -509,7 +511,7 @@ class NodeItem(QtWidgets.QGraphicsItem):
             Input = [NodeSocket(QtCore.QRect(-3.5,(self.rect.height()*x/(self.nin+1))-6,4,4), self, 'in',self.container) for x in range(1,self.nin+1) ]
             Output = [NodeSocket(QtCore.QRect(self.rect.width()-2.5,(self.rect.height()*x/(self.nop+1))-6,4,4), self, 'op',self.container) for x in range(1,self.nop+1)]
             return Input,Output
-        elif(self.type=="Cooler" or self.type=="Heater"):
+        elif(self.type=="Cooler" or self.type=="Heater" or self.type=="Heat_Exchanger"):
             Input = [NodeSocket(QtCore.QRect(3.5,(self.rect.height()*x/(self.nin+1))-4,4,4), self, 'in',self.container) for x in range(1,self.nin+1) ]
             Output = [NodeSocket(QtCore.QRect(self.rect.width()-8.0,(self.rect.height()*x/(self.nop+1))-4,4,4), self, 'op',self.container) for x in range(1,self.nop+1)]
             return Input,Output

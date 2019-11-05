@@ -2,6 +2,7 @@ from OMChem.Flowsheet import Flowsheet
 from OMChem.MatStm import MatStm
 from OMChem.Mixer import Mixer
 from OMChem.Heater import Heater
+from OMChem.Heat_Exchanger import Heat_Exchanger
 from component_selector import *
 from collections import defaultdict
 from PyQt5.QtCore import *
